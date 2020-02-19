@@ -53,8 +53,8 @@ class ProductoTest {
 	@Test
 	void testSetPrecioValido() {
 		try {
-			producto.setPrecio(22.5);
-			assertEquals(22.5, producto.getPrecio());
+			producto.setPrecio(1);
+			assertEquals(1, producto.getPrecio());
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -64,8 +64,7 @@ class ProductoTest {
 	void testSetPrecioInvalido() {
 		boolean exceptionLanzada = false;
 		try {
-			producto.setPrecio(-10);
-
+			producto.setPrecio(-1);
 		} catch (Exception e) {
 			exceptionLanzada = true;
 		}
@@ -73,25 +72,43 @@ class ProductoTest {
 	}
 
 	@Test
-	void ampliarPrecioValido() {
+	void ampliarPrecioNegativo() {
+		Boolean excepcionLanzada = false;
 		try {
-			producto.setPrecio(-10);
-			assertEquals(22.5, producto.getPrecio());
-		} catch (Exception e) {
-			e.getStackTrace();
-		}
+			producto.setPrecio(-1);
 
+		} catch (Exception e) {
+			excepcionLanzada = true;
+		}
+		assertTrue(excepcionLanzada);
 	}
 
 	@Test
-	void ampliarPrecioInvalido() {
+	void ampliarPrecioPositivoMayorMax() {
 		boolean exceptionLanzada = false;
 		try {
-			producto.ampliarPrecio(-10);
+			producto.ampliarPrecio(21);
 		} catch (Exception e) {
 			exceptionLanzada = true;
 		}
 		assertTrue(exceptionLanzada);
+	}
+
+	void ampliarPrecioPositivoMenorMax() {
+		Double precioAnterior = producto.getPrecio();
+		boolean exceptionLanzada = false;
+		try {
+			producto.ampliarPrecio(0);
+			assertEquals(precioAnterior, producto.getPrecio());
+			producto.ampliarPrecio(20);
+			assertEquals((precioAnterior + 20), producto.getPrecio());
+			producto.ampliarPrecio(10);
+			assertEquals((precioAnterior + 10), producto.getPrecio());
+
+		} catch (Exception e) {
+			exceptionLanzada = true;
+		}
+		assertFalse(exceptionLanzada);
 	}
 
 }

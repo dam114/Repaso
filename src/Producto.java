@@ -118,12 +118,13 @@ public class Producto {
 	 * parametro
 	 * 
 	 * @param incremento Parametro que indica el incremento que se le va a añadir al
-	 *                   precio del producto. Debera ser positivo.
-	 * @throws Exception Excepcion que se lanza si el incremento es negativo
+	 *                   precio del producto. Debera ser positivo y menor de 20.
+	 * @throws Exception Excepcion que se lanza si el incremento es negativo o mayor
+	 *                   de 20.
 	 */
 	public void ampliarPrecio(double incremento) throws Exception {
-		if (incremento > 0) {
-			precio += incremento;
+		if (incremento >= 0 && incremento <= 20) {
+			precio = precio + incremento;
 		} else {
 			throw new Exception("Valor inválido");
 		}
