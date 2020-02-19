@@ -4,9 +4,9 @@
  * @version 0.1
  */
 public class Producto {
-	private int id;
+	private int id = 0;
 	private String nombre;
-	private float precio;
+	private double precio = 0.0;
 	private String descripcion;
 
 	/**
@@ -24,18 +24,12 @@ public class Producto {
 	 * @param nombre      Nombre del producto
 	 * @param precio      Precio de venta del producto, que tendra que ser positivo
 	 * @param descripcion Descripcion del producto
-	 * @throws Exception Excepción que se lanza cuando el precio que se pasa por
-	 *                   parametro es negativo
 	 */
-	public Producto(int id, String nombre, float precio, String descripcion) throws Exception {
+	public Producto(int id, String nombre, double precio, String descripcion) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		if (precio >= 0) {
-			this.precio = precio;
-		} else {
-			throw new Exception("Valor inválido");
-		}
+		this.precio = precio;
 	}
 
 	/**
@@ -81,7 +75,7 @@ public class Producto {
 	 * 
 	 * @return Precio de venta del producto
 	 */
-	public float getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
@@ -92,7 +86,7 @@ public class Producto {
 	 * @param precio Precio nuevo del producto, deberá ser mayor o igual a 0
 	 * @throws Exception Excepcion que se lanza si se introduce un precio negativo
 	 */
-	public void setPrecio(float precio) throws Exception {
+	public void setPrecio(double precio) throws Exception {
 		if (precio > 0) {
 			this.precio = precio;
 		} else {
@@ -117,6 +111,23 @@ public class Producto {
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	/**
+	 * Metodo que añade al precio del articulo el incremento que se le pasa como
+	 * parametro
+	 * 
+	 * @param incremento Parametro que indica el incremento que se le va a añadir al
+	 *                   precio del producto. Debera ser positivo.
+	 * @throws Exception Excepcion que se lanza si el incremento es negativo
+	 */
+	public void ampliarPrecio(double incremento) throws Exception {
+		if (incremento > 0) {
+			precio += incremento;
+		} else {
+			throw new Exception("Valor inválido");
+		}
+
 	}
 
 	/**
